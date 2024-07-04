@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "576266180759",
+    "project_id": "terragardenapp",
+    "storage_bucket": "terragardenapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576266180759:android:3e3809355edd3f9cc071d2",
+        "android_client_info": {
+          "package_name": "com.example.terragardenapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHyAgMnBphu8v8S0zcN7jvwZ9DjuKHxxw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
