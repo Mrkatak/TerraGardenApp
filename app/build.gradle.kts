@@ -72,6 +72,7 @@ dependencies {
 
     implementation ("androidx.compose.material:material:1.6.8")
 
+    //Kotlin viewmodel & livedata
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.2")
     implementation("androidx.compose.runtime:runtime-livedata:1.6.8")

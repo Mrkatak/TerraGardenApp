@@ -16,7 +16,7 @@ class CartViewModel: ViewModel() {
             val index = _cartItems.indexOf(existingItem)
             _cartItems[index] = updatedItem
         } else {
-            _cartItems.add(CartItem(id = product.id, name = product.name, price = product.price))
+            _cartItems.add(CartItem(id = product.id, name = product.name, price = product.price, imgUrl = product.imageUrl))
         }
     }
 

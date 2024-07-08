@@ -18,6 +18,7 @@ data class Order(
     val id: String,
     val items: List<Map<String, Any>>,
     val address: String,
+    val shippingMethod: String,
     val paymentMethod: String,
     val totalPrice: Double
 )
@@ -43,11 +44,13 @@ suspend fun get10Products(): List<Product> {
 }
 
 
-fun saveOrderToFirestore(cartItems: List<CartItem>, address: String, paymentMethod: String, totalPrice: Double){
+fun saveOrderToFirestore(cartItems: List<CartItem>, address: String, shippingMethod: String, paymentMethod: String, totalPrice: Double){
     val db = FirebaseFirestore.getInstance()
     val orderData = hashMapOf(
-        "items" to cartItems.map { hashMapOf("id" to it.id, "name" to it.name, "price" to it.price, "quantity" to it.quantity) },
+        "items" to cartItems.map {
+            hashMapOf("id" to it.id, "name" to it.name, "price" to it.price, "quantity" to it.quantity) },
         "address" to address,
+        "shippingMethod" to shippingMethod,
         "paymentMethod" to paymentMethod,
         "totalPrice" to totalPrice
     )
@@ -73,6 +76,7 @@ fun fetchOrders(onOrdersFetched: (List<Order>) -> Unit)  {
                     id = document.id,
                     items = document.get("items") as List<Map<String, Any>>,
                     address = document.getString("address") ?: "",
+                    shippingMethod = document.getString("shippingMethod") ?: "",
                     paymentMethod = document.getString("paymentMethod") ?: "",
                     totalPrice = document.getDouble("totalPrice") ?: 0.0
                 )
@@ -94,6 +98,7 @@ fun fetchOrderById(orderId: String, onOrderFetched: (Order?) -> Unit) {
                     id = document.id,
                     items = document.get("items") as List<Map<String, Any>>,
                     address = document.getString("address") ?: "",
+                    shippingMethod = document.getString("shippingMethod") ?: "",
                     paymentMethod = document.getString("paymentMethod") ?: "",
                     totalPrice = document.getDouble("totalPrice") ?: 0.0
                 )

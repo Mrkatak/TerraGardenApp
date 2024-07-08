@@ -54,7 +54,6 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.terragardenapp.R
 import com.example.terragardenapp.data.Product
 import com.example.terragardenapp.data.PromoImages
-import com.example.terragardenapp.data.get10Products
 import com.example.terragardenapp.data.get5Products
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.delay
@@ -285,7 +284,7 @@ fun ImagePromo() {
 
     LaunchedEffect(Unit){
         while (true) {
-            delay(1000)
+            delay(5000)
             currentIndex = (currentIndex + 1) % PromoImages.drawableResIds.size
         }
     }
@@ -297,23 +296,7 @@ fun ImagePromo() {
     )
 }
 
-@Composable
-fun HomeListProduct() {
-    val products = remember { mutableStateOf<List<Product>>(emptyList()) }
-    LaunchedEffect(Unit) {
-        products.value = get10Products()
-    }
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        modifier = Modifier
-            .height(1050.dp),
 
-    ) {
-        items(products.value) {
-
-        }
-    }
-}
 
 @Composable
 fun ProductItem(product: Product, onItemClick: ()-> Unit) {
