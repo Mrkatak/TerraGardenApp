@@ -42,11 +42,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
+import com.example.terragardenapp.data.CreateNotificationChannel
 import com.example.terragardenapp.data.saveOrderToFirestore
+import com.example.terragardenapp.data.showNotification
 import com.example.terragardenapp.viewmodel.CartItem
 
 
@@ -67,6 +70,8 @@ fun CheckoutScreen(cartItems: List<CartItem>) {
     val totalPrice = cartItems.sumOf { it.price * it.quantity }
     var showDialog by remember { mutableStateOf(false) }
 
+    val context = LocalContext.current
+    CreateNotificationChannel()
 
     Column(modifier = Modifier
         .fillMaxSize()
@@ -240,9 +245,10 @@ fun CheckoutScreen(cartItems: List<CartItem>) {
             }
         }
         Spacer(modifier = Modifier.height(16.dp))
-        Column(Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
         ) {
             Text(
                 text = "Total: Rp${"%.2f".format(totalPrice)}",
@@ -272,6 +278,8 @@ fun CheckoutScreen(cartItems: List<CartItem>) {
                     onClick = {
                         saveOrderToFirestore(cartItems, address, shippingMethod, paymentMethod, totalPrice)
                         showDialog = false
+                        showNotification(context, "PESANAN BERHASIL", "Cek menu order untuk info lainnya")
+                        //Toast.makeText(context, "Pesanan Berhasil", Toast.LENGTH_SHORT).show()
                     }
                 ) {
                     Text("Confirm")
